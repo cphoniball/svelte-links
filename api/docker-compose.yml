@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+
+  postgres:
+    build:
+      context: ./docker/postgres
+    environment:
+      POSTGRES_DB: links_dev
+      POSTGRES_TEST_DB: links_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+volumes:
+  postgres:
