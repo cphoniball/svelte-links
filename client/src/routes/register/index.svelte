@@ -24,14 +24,7 @@
 
     user = { ...initialUser };
 
-    console.log(await response.json());
-
-    // TODO: Parse response from server and show more detailed error messages
-    if (response.status === 201) {
-      return { status: "ok" };
-    } else {
-      return { status: "error" };
-    }
+    return response.status === 201 ? { status: "ok" } : { status: "error" };
   };
 
   const submitCreateUser = async () => {
