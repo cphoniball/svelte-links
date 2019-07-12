@@ -5,20 +5,15 @@ class User < ApplicationRecord
 
   # TODO: Add unique constraints to this model
 
-  # TODO: Move this token logic out to a different class/service object
   def token
-    JWT.encode({ id: self.id, username: self.username }, Rails.configuration.jwt_secret, 'HS256')
-  end
-
-  def decode_token(token)
-    JWT.decode token, Rails.configuration.jwt_secret, true, { algorithm: 'HS256' }
+    TokenService.create({ id: self.id, username: self.username })
   end
 
   def token_valid?(token)
     begin
-      decode(token)
-      true
-    rescue => exception
+      payload = TokenService.decode(token)
+      payload["id"] == self.id
+    rescue
       false
     end
   end
