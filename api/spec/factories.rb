@@ -2,7 +2,8 @@ FactoryBot.define do
   factory :user do
     sequence(:username) { |n| "Chris #{n}" }
     sequence(:email) { |n| "chris-#{n}@foobar.com" }
-    password_digest { "testing password hash here" } # TODO: Put this in once we have bcrypt/etc.
+    password { "password" }
+    password_confirmation { "password" }
   end
 
   factory :link_page do

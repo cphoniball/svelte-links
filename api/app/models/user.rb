@@ -5,6 +5,14 @@ class User < ApplicationRecord
 
   # TODO: Add unique constraints to this model
 
+  def self.find_for_token(token)
+    User.find(TokenService.decode(token)["id"])
+  end
+
+  def as_json(options = {})
+    super(options.merge({ except: [:password_digest] }))
+  end
+
   def token
     TokenService.create({ id: self.id, username: self.username })
   end
