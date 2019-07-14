@@ -1,7 +1,11 @@
 <script>
+	import { onMount } from 'svelte';
 	import Nav from '../components/Nav.svelte';
+	import { auth } from '../stores/auth';
 
 	export let segment;
+
+	onMount(auth.getUserData);
 </script>
 
 <style>

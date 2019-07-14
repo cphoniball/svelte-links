@@ -6,7 +6,7 @@ class TokensController < ApplicationController
     user = User.find_by!(username: params[:username])
 
     if user.authenticate(params[:password])
-      render_success(data: user.token, status: :created)
+      respond_success(data: user.token, status: :created)
     else
       respond_error(message: "Invalid credentials", status: :unauthorized)
     end
