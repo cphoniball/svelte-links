@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 
 const { subscribe, set, update } = writable({
+    hasFetched: false,
     isAuthenticated: false,
     userData: null
 });
@@ -19,14 +20,12 @@ const getUserData = async () => {
 
     const body = await response.json();
 
-    console.log(body);
-
-    set({ isAuthenticated: true, userData: body.data });
+    set({ hasFetched: true, isAuthenticated: true, userData: body.data });
 };
 
 const logout = () => {
     localStorage.removeItem("token");
-    set({ isAuthenticated: false, userData: null });
+    set({ hasFetched: true, isAuthenticated: false, userData: null });
 };
 
 export const auth = {

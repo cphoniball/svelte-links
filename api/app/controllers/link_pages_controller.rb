@@ -1,6 +1,10 @@
 class LinkPagesController < ApplicationController
+  before_action :require_valid_token
+
+  # TODO: Limit all these actions to return/set data only for link pages tied to the current user
+
   def index
-    render json: LinkPage.all
+    render json: LinkPage.where(user_id: @current_user.id)
   end
 
   def get
@@ -8,7 +12,9 @@ class LinkPagesController < ApplicationController
   end
 
   def create
-    if @link_page = LinkPage.create(link_page_params)
+    create_params = link_page_params
+    create_params[:user_id] = @current_user.id
+    if @link_page = LinkPage.create(create_params)
       render json: @link_page, status: :created
     else
       render json: { message: "Unable to create link page." }, status: :internal_server_error
@@ -25,6 +31,6 @@ class LinkPagesController < ApplicationController
 
   def link_page_params
     params.require(:name)
-    params.permit(:name, :user_id)
+    params.permit(:name).merge(user_id: @current_user.id)
   end
 end
