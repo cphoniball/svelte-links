@@ -2,9 +2,10 @@ class LinkPagesController < ApplicationController
   before_action :require_valid_token
 
   # TODO: Limit all these actions to return/set data only for link pages tied to the current user
+  # TODO: Update methods to use respond_ methods
 
   def index
-    render json: LinkPage.where(user_id: @current_user.id)
+    respond_success(data: LinkPage.where(user_id: @current_user.id))
   end
 
   def get

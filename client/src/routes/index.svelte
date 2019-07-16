@@ -1,6 +1,7 @@
 <script>
   import { auth } from "../stores/auth";
   import { onDestroy, onMount } from "svelte";
+  import api from "../services/api";
 
   let isAuthenticated = null;
   let userData = null;
@@ -14,14 +15,8 @@
   });
 
   const getLinkPages = async () => {
-    const response = await fetch("http://localhost:4000/link_pages", {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    });
-
-    linkPages = await response.json();
+    console.log((await api.get("/link_pages")));
+    linkPages = (await api.get("/link_pages")).data;
   };
 
   onMount(getLinkPages);
