@@ -15,7 +15,6 @@
   });
 
   const getLinkPages = async () => {
-    console.log((await api.get("/link_pages")));
     linkPages = (await api.get("/link_pages")).data;
   };
 

@@ -64,12 +64,13 @@
     <li>
       <a class={segment === undefined ? 'selected' : ''} href=".">home</a>
     </li>
-    <li>
-      <a class={segment === 'register' ? 'selected' : ''} href="register">
-        register
-      </a>
-    </li>
+
     {#if !isAuthenticated}
+      <li>
+        <a class={segment === 'register' ? 'selected' : ''} href="register">
+          register
+        </a>
+      </li>
       <li>
         <a class={segment === 'login' ? 'selected' : ''} href="login">login</a>
       </li>
@@ -80,16 +81,5 @@
         </a>
       </li>
     {/if}
-
-    <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-    <li>
-      <a
-        rel="prefetch"
-        class={segment === 'blog' ? 'selected' : ''}
-        href="blog">
-        blog
-      </a>
-    </li>
   </ul>
 </nav>

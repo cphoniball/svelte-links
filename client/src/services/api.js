@@ -3,12 +3,14 @@ const Api = () => {
 
     const getToken = () => localStorage.getItem("token");
 
-    const request = async (path, method = "get", body = {}, options = {}) => {
+    const request = async (path, method = "get", body = null, options = {}) => {
         const response = await fetch(host + path, {
             method,
             ...options,
+            body: body ? JSON.stringify(body) : null,
             headers: {
                 Authorization: `Bearer ${getToken()}`,
+                "Content-Type": "application/json",
                 ...options.headers
             }
         });
