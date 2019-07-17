@@ -9,7 +9,7 @@ class LinkPagesController < ApplicationController
   end
 
   def get
-    render json: LinkPage.find(params[:id])
+    respond_success(data: LinkPage.find(params[:id]))
   end
 
   def create

@@ -56,7 +56,7 @@
         <li class="link-page border p-3 mb-1 flex justify-content-between">
           <span>{linkPage.name}</span>
           <span class="buttons">
-            <button class="btn btn-primary">View</button>
+            <a href="/link-pages/{linkPage.id}" class="btn btn-primary">View</a>
             <button class="btn btn-danger">Delete</button>
           </span>
         </li>
