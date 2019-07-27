@@ -5,20 +5,19 @@ class LinkPagesController < ApplicationController
   # TODO: Update methods to use respond_ methods
 
   def index
-    respond_success(data: LinkPage.where(user_id: @current_user.id))
+    respond_success(data: LinkPageService.all_for_user(@current_user))
   end
 
-  def get
+  def show
     respond_success(data: LinkPage.find(params[:id]))
   end
 
   def create
-    create_params = link_page_params
-    create_params[:user_id] = @current_user.id
-    if @link_page = LinkPage.create(create_params)
-      render json: @link_page, status: :created
+    # create_params[:user_id] = @current_user.id TODO: Do we still need this?
+    if @link_page = LinkPage.create(link_page_params)
+      respond_created(data: @link_page)
     else
-      render json: { message: "Unable to create link page." }, status: :internal_server_error
+      respond_error(message: "Unable to create link page")
     end
   end
 

@@ -14,7 +14,7 @@ module Links
     # Tell rails this is an API-only application
     config.api_only = true
 
-    config.jwt_secret = ENV.fetch("JWT_SECRET")
+    # config.jwt_secret = ENV.fetch("JWT_SECRET")
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do

@@ -10,6 +10,10 @@ class ApplicationController < ActionController::API
     render json: { data: data }, status: status
   end
 
+  def respond_created(data:)
+    respond_success(data, :created)
+  end
+
   def respond_error(message:, detail: [], status: :internal_server_error)
     render json: { message: message, detail: detail }, status: status
   end
