@@ -9,7 +9,7 @@
   const createLinkPage = async () => {
     const token = await api.post("/link_pages", { name });
 
-    // TODO: Check for error and show error message if we couldn't create for whwatever reason
+    // TODO: Check for error and show error message if we couldn't create for whatever reason
     goto("/");
   };
 </script>
